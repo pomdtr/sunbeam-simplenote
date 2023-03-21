@@ -4,6 +4,7 @@ sncli export | sunbeam query '.[] | {
     title: (.content | split("\n") | .[0]),
     detail: {
         text: .content,
+        language: "markdown"
     },
     actions: [
         {"type": "open", "url": "simplenote://note/\(.key)"}
