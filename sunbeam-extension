@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+sncli export | sunbeam query '.[] | {
+    title: (.content | split("\n") | .[0]),
+    detail: {
+        text: .content,
+    },
+    actions: [
+        {"type": "open", "url": "simplenote://note/\(.key)"}
+    ]
+}' |  sunbeam query --slurp '{
+    type: "list",
+    showDetail: true,
+    items: .
+}'
