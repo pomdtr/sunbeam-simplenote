@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 sncli export | sunbeam query '.[] | {
     title: (.content | split("\n") | .[0]),
     detail: {
@@ -7,7 +9,7 @@ sncli export | sunbeam query '.[] | {
         language: "markdown"
     },
     actions: [
-        {"type": "open", "url": "simplenote://note/\(.key)"}
+        {"type": "open", "target": "simplenote://note/\(.key)"}
     ]
 }' |  sunbeam query --slurp '{
     type: "list",
